@@ -31,3 +31,22 @@
     service: 
       name: jenkins 
       enabled: yes 
+
+---
+- hosts: aws-managed-01
+  become: true
+  tasks:
+  - name: git installation
+    yum:
+      name: git
+      state: present
+      update_cache: yes
+
+---
+- hosts: all
+  become: true
+  tasks:
+  - name: creating the user
+    user:
+      name: john
+      state: present
