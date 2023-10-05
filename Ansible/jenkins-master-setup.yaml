@@ -1,13 +1,13 @@
 ---
-- hosts: jenkins-master
+- hosts: jenkins-master 
   become: true 
   tasks: 
-  - name: add jenkins key 
+  - name: ansible module to add the jenkins key 
     apt_key: 
       url:  https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
       state: present 
 
-  - name: add jenkins repo 
+  - name: ansible module to add the jenkins repo 
     apt_repository: 
       repo: 'deb https://pkg.jenkins.io/debian-stable binary/'
       state: present 
@@ -31,22 +31,22 @@
     service: 
       name: jenkins 
       enabled: yes 
+# ansible-playbook -i /opt/hosts jenkins.yml --check - to run this playbook
+# ---
+# - hosts: aws-managed-01
+#   become: true
+#   tasks:
+#   - name: git installation
+#     yum:
+#       name: git
+#       state: present
+#       update_cache: yes
 
----
-- hosts: aws-managed-01
-  become: true
-  tasks:
-  - name: git installation
-    yum:
-      name: git
-      state: present
-      update_cache: yes
-
----
-- hosts: all
-  become: true
-  tasks:
-  - name: creating the user
-    user:
-      name: john
-      state: present
+# ---
+# - hosts: all
+#   become: true
+#   tasks:
+#   - name: creating the user
+#     user:
+#       name: john
+#       state: present
